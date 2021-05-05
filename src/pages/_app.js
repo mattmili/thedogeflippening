@@ -14,11 +14,26 @@ export default function MyApp(props) {
         }
     }, []);
 
+    const BASE_PATH = 'https://thedogeflippening.com'
+
     return (
         <SiteLayout>
             <Head>
-                <title>Where to buy Dogecoin?</title>
+
                 <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+                <meta charSet="utf-8" />
+                <title>The DOGE Flippening</title>
+                <meta name="title" content="The DOGE Flippening" />
+                <meta name="description" content="Track the Dogecoin flippening event." />
+
+                <meta property="og:type" content="website" />
+                <meta property="og:url" content={BASE_PATH} />
+                <meta property="og:title" content="The DOGE Flippening" />
+                <meta property="og:description" content="Track the Dogecoin flippening event." />
+
+                <meta property="twitter:url" content={BASE_PATH} />
+                <meta property="twitter:title" content="The DOGE Flippening" />
+                <meta property="twitter:description" content="Track the Dogecoin flippening event." />
             </Head>
             <Component {...pageProps} />
         </SiteLayout>

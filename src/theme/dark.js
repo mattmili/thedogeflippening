@@ -43,7 +43,21 @@ const theme = createMuiTheme({
             primary: '#e8e6e3',
             secondary: '#b3b6b3'
         },
-        divider: '#2F3135'
+        divider: '#2F3135',
+        // Custom
+        pricechange: {
+            up: {
+                background: 'rgb(122 174 26 /18%)',
+                text: '#7AAE1A'
+            },
+            down: {
+                background: 'rgb(218 86 79 / 18%)',
+                text: '#DA564F'
+            },
+            neutral: {
+                background: 'rgb(242 242 242 / 18%)',
+            }
+        }
     },
     overrides: {
         MuiAppBar: {

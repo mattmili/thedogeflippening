@@ -55,7 +55,7 @@ const Layout = ({ children, window }) => {
         <CustomThemeProvider>
             {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
             <CssBaseline />
-            <Container maxWidth="lg">
+            <Container maxWidth="xl">
                 <div className={classes.root}>
                     <main style={{
                         width: '100%',

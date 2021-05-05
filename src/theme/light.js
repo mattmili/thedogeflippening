@@ -39,7 +39,21 @@ const theme = createMuiTheme({
         },
         text: {
             primary: '#000',
-            secondary: 'rgb(0,0,0,0.75)'
+            secondary: 'rgb(0,0,0,0.5)'
+        },
+        // Custom
+        pricechange: {
+            up: {
+                background: 'rgb(122 174 26 /18%)',
+                text: '#7AAE1A'
+            },
+            down: {
+                background: 'rgb(218 86 79 / 18%)',
+                text: '#DA564F'
+            },
+            neutral: {
+                background: 'rgb(242 242 242 / 18%)',
+            }
         }
     },
     overrides: {
