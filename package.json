@@ -1,0 +1,28 @@
+{
+  "name": "wheretobuydoge",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "debug": "NODE_OPTIONS='--inspect' next dev"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/data-grid": "^4.0.0-alpha.17",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.58",
+    "axios": "^0.19.2",
+    "lodash": "^4.17.19",
+    "moment": "^2.29.1",
+    "next": "9.5.0",
+    "next-images": "^1.7.0",
+    "numeral": "^2.0.6",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "styled-components": "^5.2.0",
+    "swr": "^0.3.8"
+  },
+  "devDependencies": {}
+}
