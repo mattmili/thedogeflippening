@@ -218,9 +218,7 @@ const Home = ({ data }) => {
                                                     <Typography variant="h6">{numeral(total_volume).format('$0.00a')}</Typography>
                                                 </TableCell>
                                                 <TableCell align="right">
-                                                    <FormControl fullWidth>
-                                                        <Button size="medium" color="primary" variant="contained" href='https://ftx.com/#a=3683412' target='_blank'>Buy Doge</Button>
-                                                    </FormControl>
+
                                                 </TableCell>
                                             </TableRow>
                                         )
@@ -236,7 +234,7 @@ const Home = ({ data }) => {
                 <Grid container spacing={4}>
                     <Grid item xs={12}>
                         <Typography variant="h3" gutterBottom>What is the Flippening?</Typography>
-                        <Typography variant="h5">The term "Flippening" refers to the hypothetical moment of Dogecoin (DOGE) overtaking Bitcoin (BTC) and Ethereum (ETH) as the biggest cryptocurrency. Market cap based on circulating supply is the main metric to determine "The Flippening".</Typography>
+                        <Typography variant="h5">The term "Flippening" refers to the hypothetical moment of Dogecoin (DOGE) becoming the biggest cryptocurrency. Market cap based on circulating supply is the main metric to determine "The Flippening".</Typography>
                     </Grid>
                     <Grid item xs={12}>
                         <Box
@@ -254,7 +252,25 @@ const Home = ({ data }) => {
                     </Grid>
                 </Grid>
             </Grid>
+            <Grid item xs={12}>
+                <Divider></Divider>
+            </Grid>
+
+            <Grid item xs={12}>
+                <Box
+                    display="flex"
+                    justifyContent="center"
+                    alignItems="center"
+                    pb={8}
+                >
+                    <FormControl>
+                        <Button size="large" color="primary" variant="contained" href='https://ftx.com/#a=3683412' target='_blank'>Buy Doge on FTX</Button>
+                    </FormControl>
+                </Box>
+            </Grid>
+
         </Grid>
+
     )
 }
 
