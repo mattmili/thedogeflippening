@@ -13,6 +13,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Axios from 'axios';
 import { useEffect, useState } from 'react';
 import Doge from '../../public/doge.gif'
+import useSWR from 'swr'
+
 
 const countries = [
     { name: 'Afghanistan', code: 'AF' },
@@ -283,9 +285,6 @@ const useStyles = makeStyles({
 
 const CountrySelect = ({ value, onChange }) => {
     const classes = useStyles();
-
-    console.log('value', value)
-
     return (
         <Autocomplete
             id="country-select-demo"
@@ -319,7 +318,40 @@ const CountrySelect = ({ value, onChange }) => {
     );
 }
 
-const Index = ({ country, countryCode }) => {
+const fetcher = async (url) => {
+    let res = await Axios.get(url)
+    return res.data
+}
+
+const Main = () => {
+
+    const { data, error } = useSWR('https://extreme-ip-lookup.com/json/', fetcher)
+
+    if (error) return (<Typography>Error loading data</Typography>)
+    if (!data) return (
+        <Container maxWidth="md">
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{ minHeight: '100vh' }}
+            >
+                <Grid item xs={12}>
+                    <Grid container justify="center">
+                        <img src={Doge} />
+                    </Grid>
+                </Grid>
+
+            </Grid>
+        </Container>
+    )
+
+    return <Home country={data.country} countryCode={data.countryCode} />
+}
+
+const Home = ({ country, countryCode }) => {
 
     const [state, setState] = useState({
         name: country,
@@ -327,11 +359,6 @@ const Index = ({ country, countryCode }) => {
         link: FTX_REF_LINK,
         exchangeName: 'FTX'
     })
-
-
-    useEffect(() => {
-        console.log(state)
-    }, [state])
 
     useEffect(() => {
         if (!Object.keys(restrictions).includes(state.code)) {
@@ -401,16 +428,5 @@ const Index = ({ country, countryCode }) => {
     )
 }
 
-export async function getServerSideProps() {
-
-    let res = await Axios.get('https://extreme-ip-lookup.com/json/')
-
-    return {
-        props: {
-            ...res.data
-        }
-    }
-}
-
-export default Index;
+export default Main;
 
