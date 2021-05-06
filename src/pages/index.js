@@ -64,7 +64,7 @@ const Main = () => {
 
 const Change = withStyles((theme) => ({
     root: props => ({
-        color: props.value == 0 ?
+        color: props.value <= 0.01 ?
             theme.palette.text.primary
             : (Math.sign(props.value) == -1
                 ? theme.palette.pricechange.down.text
@@ -72,6 +72,20 @@ const Change = withStyles((theme) => ({
     }),
 }))(({ children, classes, ...props }) => {
     // let sign = (props.value == '' ? '' : (Math.sign(props.value) == -1 ? '' : '+'))
+
+    if (props.value <= 0.01) {
+        return (
+            <Typography
+                variant="h6"
+                align="right"
+                className={classes.root}
+                {...props}
+            >
+                $0.00 (0.00%)
+            </Typography>
+        )
+    }
+
     return (
         <Typography
             variant="h6"
