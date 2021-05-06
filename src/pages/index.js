@@ -2,9 +2,7 @@ import {
     Grid,
     Typography,
     Button,
-    MenuItem,
     FormControl,
-    TextField,
     Container,
     Box,
     Tooltip,
@@ -16,10 +14,8 @@ import {
     TableHead,
     TableRow
 } from '@material-ui/core';
-import { withStyles } from "@material-ui/core/styles";
-
+import { withStyles, makeStyles } from "@material-ui/core/styles";
 import { TwitterTweetEmbed } from 'react-twitter-embed';
-
 import Axios from 'axios';
 import Doge from '../../public/doge.gif'
 import useSWR from 'swr'
@@ -27,9 +23,29 @@ import numeral from 'numeral'
 
 import LinearProgressWithLabel from '../components/LinearProgressWithLabel';
 
+const FTX_REF_LINK = 'https://ftx.com/#a=3683412';
+const FTX_US_REF_LINK = 'https://ftx.us/#a=5538149'
+
 const fetcher = async (url) => {
     let res = await Axios.get(url)
     return res.data
+}
+
+const FTXRefLink = () => {
+    const { data, error } = useSWR('https://extreme-ip-lookup.com/json/', fetcher)
+    if (error || !data) return (
+        <FormControl>
+            <Button size="large" color="primary" variant="contained" href={FTX_REF_LINK} target='_blank'>Buy Doge on FTX</Button>
+        </FormControl>)
+
+    return (
+        <FormControl>
+            {data.country === 'US' ?
+                <Button size="large" color="primary" variant="contained" href={FTX_US_REF_LINK} target='_blank'>Buy Doge on FTX.US</Button>
+                : <Button size="large" color="primary" variant="contained" href={FTX_REF_LINK} target='_blank'>Buy Doge on FTX</Button>
+            }
+        </FormControl>
+    )
 }
 
 const Main = () => {
@@ -38,22 +54,20 @@ const Main = () => {
 
     if (error) return (<Typography>Error loading data</Typography>)
     if (!data) return (
-        <Container maxWidth="md">
-            <Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                justify="center"
-                style={{ minHeight: '100vh' }}
-            >
-                <Grid item xs={12}>
-                    <Grid container justify="center">
-                        <img src={Doge} />
-                    </Grid>
+        <Grid
+            container
+            spacing={0}
+            direction="column"
+            alignItems="center"
+            justify="center"
+            style={{ minHeight: '100vh' }}
+        >
+            <Grid item xs={12}>
+                <Grid container justify="center">
+                    <img src={Doge} />
                 </Grid>
             </Grid>
-        </Container>
+        </Grid>
     )
 
     return <Home data={data} />
@@ -95,7 +109,20 @@ const Change = withStyles((theme) => ({
     );
 });
 
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        boxShadow: '0 3px 6px rgba(0,0,0,0.16), 0 2px 10px rgba(0,0,0,0.15)',
+    },
+    ticker: {
+        color: '#8f8f8f'
+    }
+}));
+
+
 const Home = ({ data }) => {
+
+    const classes = useStyles();
 
     let doge = data.filter(coin => coin.symbol.toUpperCase() === 'DOGE')
 
@@ -126,7 +153,6 @@ const Home = ({ data }) => {
                                     <TableRow>
                                         <TableCell>
                                             <Typography variant="h6">Symbol</Typography>
-
                                         </TableCell>
                                         <TableCell align="right">
                                             <Typography variant="h6">Price</Typography>
@@ -172,7 +198,7 @@ const Home = ({ data }) => {
                                                                 <Typography variant="h6">{name}</Typography>
                                                             </Grid>
                                                             <Grid item>
-                                                                <Typography variant="h6">{symbol.toUpperCase()}</Typography>
+                                                                <Typography variant="h6" classes={{ root: classes.ticker }}>{symbol.toUpperCase()}</Typography>
                                                             </Grid>
                                                         </Grid>
                                                     </TableCell>
@@ -196,7 +222,7 @@ const Home = ({ data }) => {
                                             )
                                         }
                                         return (
-                                            <TableRow key={symbol}>
+                                            <TableRow key={symbol} classes={{ root: classes.root }}>
                                                 <TableCell>
                                                     <Grid container spacing={1} alignItems="center">
                                                         <Grid item>
@@ -212,7 +238,7 @@ const Home = ({ data }) => {
                                                             <Typography variant="h6">{name}</Typography>
                                                         </Grid>
                                                         <Grid item>
-                                                            <Typography variant="h6">{symbol.toUpperCase()}</Typography>
+                                                            <Typography variant="h6" classes={{ root: classes.ticker }}>{symbol.toUpperCase()}</Typography>
                                                         </Grid>
                                                     </Grid>
                                                 </TableCell>
@@ -274,9 +300,7 @@ const Home = ({ data }) => {
                     alignItems="center"
                     pb={8}
                 >
-                    <FormControl>
-                        <Button size="large" color="primary" variant="contained" href='https://ftx.com/#a=3683412' target='_blank'>Buy Doge on FTX</Button>
-                    </FormControl>
+                    <FTXRefLink />
                 </Box>
             </Grid>
 
