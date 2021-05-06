@@ -16,13 +16,11 @@ import {
     TableHead,
     TableRow
 } from '@material-ui/core';
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { withStyles } from "@material-ui/core/styles";
 
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 import Axios from 'axios';
-import { useEffect, useState } from 'react';
 import Doge from '../../public/doge.gif'
 import useSWR from 'swr'
 import numeral from 'numeral'
@@ -31,7 +29,6 @@ import LinearProgressWithLabel from '../components/LinearProgressWithLabel';
 
 const fetcher = async (url) => {
     let res = await Axios.get(url)
-    console.log(res)
     return res.data
 }
 
