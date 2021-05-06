@@ -28,6 +28,7 @@ const FTX_US_REF_LINK = 'https://ftx.us/#a=5538149'
 
 const fetcher = async (url) => {
     let res = await Axios.get(url)
+    console.log(res)
     return res.data
 }
 
@@ -162,14 +163,15 @@ const Home = ({ data }) => {
                                             <Typography variant="h6">24h Change</Typography>
 
                                         </TableCell>
-                                        <TableCell align="right">
-                                            <Typography variant="h6">24h Vol</Typography>
 
-                                        </TableCell>
                                         <TableCell align="right">
                                             <Tooltip title="Based on circulating supply" placement="top-end">
                                                 <Typography variant="h6">Market cap</Typography>
                                             </Tooltip>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <Typography variant="h6">24h Vol</Typography>
+
                                         </TableCell>
                                         <TableCell align="right">
                                             <Typography variant="h6">Flippening Progress 🚀</Typography>
